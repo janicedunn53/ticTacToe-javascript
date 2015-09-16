@@ -30,9 +30,9 @@ describe('Board', function() {
     expect(testBoard.playBoard.length).to.equal(9);
   });
 
-  // it("finds a space by coordinates", function() {
-  //   var testBoard = new Board();
-  //   var testSpace = new Space(1, 2);
-  //   expect(testBoard.findSpace(testSpace)).to.equal(testSpace);
-  // });
+  it("finds a space by coordinates", function() {
+    var testBoard = new Board();
+    var testSpace = new Space(1, 2);
+    expect(testBoard.findSpace(testSpace)).to.equal(testSpace);
+  });
 });

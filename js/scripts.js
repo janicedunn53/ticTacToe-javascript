@@ -31,9 +31,10 @@ function Board() {
   this.playBoard.push(new Space(2,2));
 }
 
-// Board.prototype.findSpace = function(space) {
-//   // for(var i = 0; i < this.playBoard.length; i++) {
-//   //   if (this.playBoard[i]) === (space.xCoordinate, space.yCoordinate))
-//   //     return space;
-//   // }
-// }
+Board.prototype.findSpace = function(space) {
+  for(var i = 0; i < this.playBoard.length; i++) {
+    if (this.playBoard[i].xCoordinate === space.xCoordinate && this.playBoard[i].yCoordinate === space.yCoordinate) {
+      return space;
+    }
+  }
+}
