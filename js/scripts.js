@@ -2,10 +2,10 @@ function Player(mark) {
   this.mark = mark;
 }
 
-function Space(xCoordinate, yCoordinate, playerMark) {
+function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
-  this.playerMark = playerMark;
+  this.playerMark = null;
 }
 
 Space.prototype.selectSquare = function(mark) {
@@ -16,3 +16,24 @@ Space.prototype.selectSquare = function(mark) {
 Space.prototype.markedBy = function(xCoordinate, yCoordinate) {
   return this.playerMark;
 }
+
+function Board() {
+  this.playBoard = [];
+
+  this.playBoard.push(new Space(0,0));
+  this.playBoard.push(new Space(0,1));
+  this.playBoard.push(new Space(0,2));
+  this.playBoard.push(new Space(1,0));
+  this.playBoard.push(new Space(1,1));
+  this.playBoard.push(new Space(1,2));
+  this.playBoard.push(new Space(2,0));
+  this.playBoard.push(new Space(2,1));
+  this.playBoard.push(new Space(2,2));
+}
+
+// Board.prototype.findSpace = function(space) {
+//   // for(var i = 0; i < this.playBoard.length; i++) {
+//   //   if (this.playBoard[i]) === (space.xCoordinate, space.yCoordinate))
+//   //     return space;
+//   // }
+// }
