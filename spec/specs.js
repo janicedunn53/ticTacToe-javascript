@@ -55,10 +55,13 @@ describe('Board', function() {
     expect(testBoard.winner()).to.equal(false);
   });
 
-  it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+  it("tells if there is not a winner if a row includes null", function() {
     var testBoard = new Board();
     var playerX = new Player("X");
     var playerO = new Player("O");
+    testBoard.find(0,0).selectSquare(playerX);
+    testBoard.find(0,1).selectSquare(null);
+    testBoard.find(0,2).selectSquare(playerX);
     expect(testBoard.winner()).to.equal(false);
   });
 });

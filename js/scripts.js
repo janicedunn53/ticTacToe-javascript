@@ -2,6 +2,14 @@ function Player(mark) {
   this.mark = mark;
 }
 
+function switchPlayer() {
+  if (turn === "X") {
+    turn = "O";
+  } else {
+    turn = "X"
+  }
+}
+
 function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
@@ -10,7 +18,6 @@ function Space(xCoordinate, yCoordinate) {
 
 Space.prototype.selectSquare = function(player) {
   this.playerMark = player;
-  // return (this.xCoordinate, this.yCoordinate);
 }
 
 Space.prototype.markedBy = function() {
@@ -39,15 +46,6 @@ Board.prototype.find = function(xCoordinate, yCoordinate) {
 }
 
 Board.prototype.winner = function() {
-  // if( (this.find(0,0).markedBy() === null || this.find(0,1).markedBy() === null || this.find(0,2).markedBy() === null) === true ) {
-  //   return false;
-  // } else {
-  //   if( ( (this.find(0,0).markedBy().mark === this.find(0,1).markedBy().mark) && (this.find(0,1).markedBy().mark === this.find(0,2).markedBy().mark) ) === true ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   if( ( (this.find(0,0).markedBy() === null || this.find(0,1).markedBy() === null || this.find(0,2).markedBy() === null) === false ) && ( ( (this.find(0,0).markedBy().mark === this.find(0,1).markedBy().mark) && (this.find(0,1).markedBy().mark === this.find(0,2).markedBy().mark) ) === true ) ) {
     return true;
@@ -70,13 +68,29 @@ Board.prototype.winner = function() {
   }
 }
 
-
-
-
 function Game() {
   this.players = [];
   this.players.push(new Player("X"));
   this.players.push(new Player("O"));
 
   this.board = new Board();
+  // var game = new Game();
+  this.playerX = [];
+  this.playerO = [];
 }
+
+
+$(document).ready(function(event) {
+  $(".spot").click(function(event) {
+    event.preventDefault();
+
+    var selectedSpot = $(this).attr('id');
+
+    if (turn === "O") {
+      game.playerX.push(selectedSpot);
+    } else {
+      game.playerO.push(selectedSpot);
+    } 
+
+  });
+});
