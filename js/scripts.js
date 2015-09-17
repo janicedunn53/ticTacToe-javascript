@@ -53,6 +53,18 @@ Board.prototype.winner = function() {
     return true;
   } else if( ( (this.find(1,0).markedBy() === null || this.find(1,1).markedBy() === null || this.find(1,2).markedBy() === null) === false ) && ( ( (this.find(1,0).markedBy().mark === this.find(1,1).markedBy().mark) && (this.find(1,1).markedBy().mark === this.find(1,2).markedBy().mark) ) === true ) ) {
     return true;
+  } else if( ( (this.find(2,0).markedBy() === null || this.find(2,1).markedBy() === null || this.find(2,2).markedBy() === null) === false ) && ( ( (this.find(2,0).markedBy().mark === this.find(2,1).markedBy().mark) && (this.find(2,1).markedBy().mark === this.find(2,2).markedBy().mark) ) === true ) ) {
+    return true;
+  } else if( ( (this.find(0,2).markedBy() === null || this.find(1,2).markedBy() === null || this.find(2,2).markedBy() === null) === false ) && ( ( (this.find(0,2).markedBy().mark === this.find(1,2).markedBy().mark) && (this.find(1,2).markedBy().mark === this.find(2,2).markedBy().mark) ) === true ) ) {
+    return true;
+  } else if( ( (this.find(0,1).markedBy() === null || this.find(1,1).markedBy() === null || this.find(2,1).markedBy() === null) === false ) && ( ( (this.find(0,1).markedBy().mark === this.find(1,1).markedBy().mark) && (this.find(1,1).markedBy().mark === this.find(2,1).markedBy().mark) ) === true ) ) {
+    return true;
+  } else if( ( (this.find(0,0).markedBy() === null || this.find(1,0).markedBy() === null || this.find(2,0).markedBy() === null) === false ) && ( ( (this.find(0,0).markedBy().mark === this.find(1,0).markedBy().mark) && (this.find(1,0).markedBy().mark === this.find(2,0).markedBy().mark) ) === true ) ) {
+    return true;
+  } else if( ( (this.find(0,2).markedBy() === null || this.find(1,1).markedBy() === null || this.find(2,0).markedBy() === null) === false ) && ( ( (this.find(0,2).markedBy().mark === this.find(1,1).markedBy().mark) && (this.find(1,1).markedBy().mark === this.find(2,0).markedBy().mark) ) === true ) ) {
+    return true;
+  } else if( ( (this.find(0,0).markedBy() === null || this.find(1,1).markedBy() === null || this.find(2,2).markedBy() === null) === false ) && ( ( (this.find(0,0).markedBy().mark === this.find(1,1).markedBy().mark) && (this.find(1,1).markedBy().mark === this.find(2,2).markedBy().mark) ) === true ) ) {
+    return true;
   } else {
     return false;
   }
