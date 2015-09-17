@@ -18,6 +18,7 @@ function Space(xCoordinate, yCoordinate) {
 
 Space.prototype.selectSquare = function(player) {
   this.playerMark = player;
+
 }
 
 Space.prototype.markedBy = function() {
@@ -46,7 +47,6 @@ Board.prototype.find = function(xCoordinate, yCoordinate) {
 }
 
 Board.prototype.winner = function() {
-
   if( ( (this.find(0,0).markedBy() === null || this.find(0,1).markedBy() === null || this.find(0,2).markedBy() === null) === false ) && ( ( (this.find(0,0).markedBy().mark === this.find(0,1).markedBy().mark) && (this.find(0,1).markedBy().mark === this.find(0,2).markedBy().mark) ) === true ) ) {
     return true;
   } else if( ( (this.find(1,0).markedBy() === null || this.find(1,1).markedBy() === null || this.find(1,2).markedBy() === null) === false ) && ( ( (this.find(1,0).markedBy().mark === this.find(1,1).markedBy().mark) && (this.find(1,1).markedBy().mark === this.find(1,2).markedBy().mark) ) === true ) ) {
@@ -74,23 +74,20 @@ function Game() {
   this.players.push(new Player("O"));
 
   this.board = new Board();
-  // var game = new Game();
-  this.playerX = [];
-  this.playerO = [];
 }
+
+var game = new Game();
 
 
 $(document).ready(function(event) {
+
   $(".spot").click(function(event) {
     event.preventDefault();
+    var currentPlayer = game.players[0];
+    var selectedSpot = parseInt($(this).attr('id'));
 
-    var selectedSpot = $(this).attr('id');
-
-    if (turn === "O") {
-      game.playerX.push(selectedSpot);
-    } else {
-      game.playerO.push(selectedSpot);
-    } 
-
+    game.board.playBoard[selectedSpot].selectSquare(currentPlayer);
+    debugger;
+    alert("you win");
   });
 });
