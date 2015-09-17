@@ -19,8 +19,8 @@ describe('Space', function() {
   it("lets a player mark a space", function() {
     var testPlayer = new Player("X");
     var testSpace = new Space(1, 2);
-    testSpace.selectSquare((testPlayer.mark));
-    expect(testSpace.markedBy()).to.equal("X");
+    testSpace.selectSquare((testPlayer));
+    expect(testSpace.markedBy()).to.equal(testPlayer);
   });
 });
 
@@ -32,7 +32,72 @@ describe('Board', function() {
 
   it("finds a space by coordinates", function() {
     var testBoard = new Board();
-    var testSpace = new Space(1, 2);
-    expect(testBoard.findSpace(testSpace)).to.equal(testSpace);
+    expect(testBoard.find(1, 2)).to.equal(testBoard.playBoard[5]);
+  });
+
+  it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+    var testBoard = new Board();
+    var playerX = new Player("X");
+    var playerO = new Player("O");
+    testBoard.find(0,0).selectSquare(playerX);
+    testBoard.find(0,1).selectSquare(playerX);
+    testBoard.find(0,2).selectSquare(playerX);
+    expect(testBoard.winner()).to.equal(true);
+  });
+
+  it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+    var testBoard = new Board();
+    var playerX = new Player("X");
+    var playerO = new Player("O");
+    testBoard.find(0,0).selectSquare(playerX);
+    testBoard.find(0,1).selectSquare(playerO);
+    testBoard.find(0,2).selectSquare(playerX);
+    expect(testBoard.winner()).to.equal(false);
+  });
+
+  it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+    var testBoard = new Board();
+    var playerX = new Player("X");
+    var playerO = new Player("O");
+    expect(testBoard.winner()).to.equal(false);
+  });
+
+  // it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+  //   var testBoard = new Board();
+  //   var playerX = new Player("X");
+  //   var playerO = new Player("O");
+  //   testBoard.find(1,0).selectSquare(playerX);
+  //   testBoard.find(1,1).selectSquare(playerX);
+  //   testBoard.find(1,2).selectSquare(playerX);
+  //   expect(testBoard.winner()).to.equal(true);
+  // });
+  //
+  // it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+  //   var testBoard = new Board();
+  //   var playerX = new Player("X");
+  //   var playerO = new Player("O");
+  //   testBoard.find(1,0).selectSquare(playerX);
+  //   testBoard.find(1,1).selectSquare(playerO);
+  //   testBoard.find(1,2).selectSquare(playerX);
+  //   expect(testBoard.winner()).to.equal(false);
+  // });
+  //
+  // it("tells if there is a winner by finding three spaces in a row marked by the same player", function() {
+  //   var testBoard = new Board();
+  //   var playerX = new Player("X");
+  //   var playerO = new Player("O");
+  //   expect(testBoard.winner()).to.equal(false);
+  // });
+});
+
+describe('Game', function() {
+  it("creates 2 players when it is initialized", function() {
+    var testGame = new Game();
+    expect(testGame.players.length).to.equal(2);
+  });
+
+  it("creates a board when it is initialized", function() {
+    var testGame = new Game();
+    expect(testGame.board.playBoard.length).to.equal(9);
   });
 });
