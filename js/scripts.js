@@ -87,7 +87,6 @@ $(document).ready(function(event) {
     var selectedSpot = parseInt($(this).attr('id'));
 
     game.board.playBoard[selectedSpot].selectSquare(currentPlayer);
-    debugger;
-    alert("you win");
+     $(this).addClass('canvas-color-1');
   });
 });
