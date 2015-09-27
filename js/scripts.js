@@ -2,14 +2,6 @@ function Player(mark) {
   this.mark = mark;
 }
 
-function switchPlayer() {
-  if (turn === "X") {
-    turn = "O";
-  } else {
-    turn = "X"
-  }
-}
-
 function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
@@ -70,23 +62,54 @@ Board.prototype.winner = function() {
 
 function Game() {
   this.players = [];
-  this.players.push(new Player("X"));
-  this.players.push(new Player("O"));
+
+  var playerX = new Player("X");
+  this.players.push(playerX);
+
+  var playerO = new Player("O");
+  this.players.push(playerO);
 
   this.board = new Board();
+
+  this.currentTurn = playerX;
+
+  this.over = false;
 }
 
-var game = new Game();
+Game.prototype.changeTurn = function() {
+  if (this.over === false) {
+    if (this.currentTurn === this.players[0]) {
+      this.currentTurn = this.players[1];
+    } else {
+      this.currentTurn = this.players[0];
+    }
+  }
+}
 
+Game.prototype.isOver = function() {
+  if (this.board.winner() === true) {
+    this.over = true;
+  }
+}
 
 $(document).ready(function(event) {
 
+  var game = new Game();
+
   $(".spot").click(function(event) {
     event.preventDefault();
-    var currentPlayer = game.players[0];
+
     var selectedSpot = parseInt($(this).attr('id'));
 
-    game.board.playBoard[selectedSpot].selectSquare(currentPlayer);
-     $(this).addClass('canvas-color-1');
+    if (game.over === false) {
+      if (game.board.playBoard[selectedSpot].playerMark === null) {
+        var currentPlayer = game.currentTurn;
+        game.board.playBoard[selectedSpot].selectSquare(currentPlayer);
+
+        $(this).text(currentPlayer.mark);
+        game.isOver();
+        game.changeTurn();
+      }
+    }
   });
 });
