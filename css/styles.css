@@ -1,13 +1,9 @@
-.square {
-  font-size: 30px;
+.spot {
+  font-size: 50px;
 }
 
 td {
   width: 120px;
   height: 120px;
   text-align: center;
-}
-
-.canvas-color-1 {
-  background-color : red;
 }
