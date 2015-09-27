@@ -86,9 +86,31 @@ Game.prototype.changeTurn = function() {
   }
 }
 
-Game.prototype.isOver = function() {
+Game.prototype.isOverWinner = function() {
   if (this.board.winner() === true) {
     this.over = true;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Game.prototype.isOverCats = function() {
+  var allSelected = null;
+  this.board.playBoard.forEach(function(space) {
+    if (space.playerMark === null) {
+      allSelected = false;
+    }
+  });
+  if (allSelected === null) {
+    allSelected = true;
+  }
+
+  if (allSelected === true && this.board.winner() === false) {
+    this.over = true;
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -99,7 +121,7 @@ $(document).ready(function(event) {
   $(".spot").click(function(event) {
     event.preventDefault();
 
-    var selectedSpot = parseInt($(this).attr('id'));
+    var selectedSpot = parseInt($(this).attr("id"));
 
     if (game.over === false) {
       if (game.board.playBoard[selectedSpot].playerMark === null) {
@@ -107,8 +129,19 @@ $(document).ready(function(event) {
         game.board.playBoard[selectedSpot].selectSquare(currentPlayer);
 
         $(this).text(currentPlayer.mark);
-        game.isOver();
+        game.isOverWinner();
+        game.isOverCats();
         game.changeTurn();
+      }
+
+      if (game.over === true) {
+        if (game.isOverWinner() === true) {
+          alert("Game Over. " + game.currentTurn.mark + " wins!");
+        }
+
+        if (game.isOverCats() === true) {
+          alert("Cat's Game. Play again!");
+        }
       }
     }
   });
