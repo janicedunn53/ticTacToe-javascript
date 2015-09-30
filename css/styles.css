@@ -1,3 +1,17 @@
+body {
+  background-color: #DEC5FF;
+  font-family: 'Bree Serif', serif;
+}
+
+.container {
+  text-align: center;
+  margin-top: 2%;
+}
+
+table {
+  margin: auto;
+}
+
 .spot {
   font-size: 50px;
 }
